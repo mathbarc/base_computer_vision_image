@@ -22,9 +22,7 @@ build-job:       # This job runs in the build stage, which runs first.
   stage: build
   image: docker:20.10.6-dind
   script:
-    - echo "Compiling the code..."
     - docker build . -t base-image
-    - echo "Compile complete."
 
 #unit-test-job:   # This job runs in the test stage.
 #  stage: test    # It only starts when the job in the build stage completes successfully.
