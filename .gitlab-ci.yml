@@ -20,7 +20,6 @@ stages:          # List of stages for jobs, and their order of execution
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
-  image: docker:20.10.6-dind
   script:
     - docker build . -t base-image
 
