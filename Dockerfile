@@ -17,15 +17,15 @@ WORKDIR /home/libs
 RUN git clone https://github.com/PointCloudLibrary/pcl.git --branch pcl-1.12.1 --single-branch
 RUN mkdir /home/libs/pcl/build
 WORKDIR /home/libs/pcl/build
-RUN cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_VTK=ON -DWITH_QT=ON -DWITH_OPENNI=ON -DWITH_OPENNI2=ON -DBUILD_global_tests=OFF
+RUN cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_VTK=ON -DWITH_QT=ON -DWITH_OPENNI=ON -DWITH_OPENNI2=ON -DBUILD_global_tests=OFF -DBUILD_examples=OFF -DBUILD_apps=OFF -DBUILD_apps_3d_rec_framework=OFF -DBUILD_apps_cloud_composer=OFF -DBUILD_apps_in_hand_scanner=OFF -DBUILD_apps_modeler=OFF -DBUILD_apps_point_cloud_editor=OFF -DBUILD_benchmarks=OFF
 RUN make -j 1 install
 
-# WORKDIR /home/libs
-# RUN git clone https://github.com/davisking/dlib.git --branch v19.22 --single-branch
-# RUN mkdir /home/libs/dlib/build
-# WORKDIR /home/libs/dlib/build
-# RUN cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local
-# RUN make -j 1 install
+WORKDIR /home/libs
+RUN git clone https://github.com/davisking/dlib.git --branch v19.22 --single-branch
+RUN mkdir /home/libs/dlib/build
+WORKDIR /home/libs/dlib/build
+RUN cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local
+RUN make -j 1 install
 
 WORKDIR /home
 RUN rm -rf /home/libs
