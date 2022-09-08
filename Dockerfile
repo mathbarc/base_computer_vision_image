@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 RUN ln -snf /usr/share/zoneinfo/Brazil/East /etc/localtime && echo Brazil/East > /etc/timezone; 
-RUN apt update;DEBIAN_FRONTEND=noninteractive apt install cmake build-essential libzbar-dev libssl-dev git libavc1394-dev libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavresample-dev libavutil-dev libavresample-dev libswresample-dev libswscale-dev libeigen3-dev opencl-c-headers opencl-clhpp-headers opencl-headers libtesseract-dev libopenni2-dev libopenni-dev libflann-dev libusb-1.0-0-dev libgdal-dev libgdcm-dev -y; mkdir /home/libs
+RUN apt update;DEBIAN_FRONTEND=noninteractive apt install cmake build-essential git libavcodec-dev libavformat-dev libavresample-dev libswscale-dev libeigen3-dev libtesseract-dev libopenni2-dev libopenni-dev libusb-1.0-0-dev libgdal-dev libgdcm-dev -y; mkdir /home/libs
 
 WORKDIR /home/libs
 RUN git clone https://github.com/opencv/opencv.git --branch 4.6.0 --single-branch; git clone https://github.com/opencv/opencv_contrib.git --branch 4.6.0 --single-branch; mkdir /home/libs/opencv/build; cd /home/libs/opencv/build; cmake .. -DCMAKE_BUILD_TYPE=MinSizeRel -DWITH_QT=ON -DWITH_OPENCL=ON -DWITH_FFMPEG=ON -DWITH_TESSERACT=ON -DWITH_OPENNI=ON -DWITH_OPENNI2=ON -DWITH_GDAL=ON -DWITH_GDCM=ON -DOPENCV_EXTRA_MODULES_PATH=/home/libs/opencv_contrib/modules -DOPENCV_DNN_OPENCL=ON -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF -DOPENCV_ENABLE_NONFREE=ON; make -j 1 install; cd ../..; rm -rf opencv opencv_contrib
