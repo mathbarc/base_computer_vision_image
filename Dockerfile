@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 RUN ln -snf /usr/share/zoneinfo/Brazil/East /etc/localtime && echo Brazil/East > /etc/timezone; 
-RUN apt update;DEBIAN_FRONTEND=noninteractive apt install cmake build-essential git -y; apt clean --dry-run; apt autoclean;
+RUN apt update;DEBIAN_FRONTEND=noninteractive apt install cmake build-essential git libeigen3-dev -y; apt clean --dry-run; apt autoclean;
 
 WORKDIR /home
 RUN git clone https://github.com/davisking/dlib.git --branch v19.22 --single-branch; mkdir /home/libs/build; cd /home/dlib/build; cmake .. -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_INSTALL_PREFIX=/usr/local; make -j 1 install; cd ../..; rm -rf dlib; ldconfig
