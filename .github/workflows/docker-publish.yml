@@ -6,14 +6,12 @@ name: Docker
 # documentation.
 
 on:
-  schedule:
-    - cron: '15 20 * * *'
   push:
-    branches: [ "main", "minimal" ]
+    branches: [ "main", "minimal", "minimal_opencv"]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
-    branches: [ "main", "minimal" ]
+    branches: [ "main", "minimal", "minimal_opencv" ]
 
 env:
   # Use docker.io for Docker Hub if empty
