@@ -33,7 +33,6 @@ RUN make -j 4 install
 FROM base as runner
 
 WORKDIR /home
-
 COPY --from=builder /usr/local /usr/local
 
 ENTRYPOINT [ "/bin/bash" ]
