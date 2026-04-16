@@ -1,4 +1,4 @@
-FROM debian:12.5-slim as base
+FROM debian:12-slim as base
 RUN sed -i '/Components: main/c\Components: main contrib non-free non-free-firmware' /etc/apt/sources.list.d/debian.sources
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt update 
@@ -35,4 +35,4 @@ FROM base as runner
 WORKDIR /home
 COPY --from=builder /usr/local /usr/local
 
-ENTRYPOINT [ "/bin/bash" ]
+CMD [ "/bin/bash" ]
